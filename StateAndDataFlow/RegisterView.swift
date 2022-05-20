@@ -15,7 +15,7 @@ struct RegisterView: View {
     @State private var count = 0
     
     var body: some View {
-        VStack {
+        VStack (spacing: 32){
             HStack {
                 TextField("Enter your name...", text: $name)
                     .multilineTextAlignment(.center)
@@ -23,10 +23,12 @@ struct RegisterView: View {
                     .onChange(of: name) { newValue in
                         count = newValue.count
                     }
-                Text("Lenght: \(count)")
-                    .foregroundColor(count > 3 ? .green : .red)
+                
             }
             .padding()
+            Text("Name contains \(count) characters")
+                .lineLimit(2)
+                .foregroundColor(count >= 3 ? .green : .red)
             Button(action: registerUser) {
                 HStack {
                     Image(systemName: "checkmark.circle")
@@ -38,13 +40,8 @@ struct RegisterView: View {
     
     private func registerUser() {
         if !name.isEmpty {
-            userManger.name = name
-            userManger.logIn()
+            userManger.registerUser(name: name)
         }
-    }
-    
-    private func countTextField() {
-        count = name.count
     }
 }
 

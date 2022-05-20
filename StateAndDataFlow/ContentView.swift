@@ -29,7 +29,7 @@ struct ContentView: View {
             
             Spacer()
             
-            Button(action: userManager.logOut) {
+            Button(action: userManager.unregisterUser) {
                 Text("Log Out")
                     .font(.title).bold()
                     .foregroundColor(.white)

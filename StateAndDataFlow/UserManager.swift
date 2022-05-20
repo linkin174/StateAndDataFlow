@@ -11,26 +11,23 @@ import SwiftUI
 final class UserManager: ObservableObject {
     
     @Published var isRegistered = false
-    var name = ""
     
-    private var storageManager: StorageManager
+    var name: String { storageManager.username }
     
-    init(storageManager: StorageManager) {
+    private let storageManager: StorageProtocol
+    
+    init(storageManager: StorageProtocol) {
         self.storageManager = storageManager
-        name = storageManager.username
         isRegistered = storageManager.isRegistered
     }
-    
-    func logIn() {
+
+    func registerUser(name: String) {
         isRegistered.toggle()
-        storageManager.isRegistered = isRegistered
-        storageManager.username = name
+        storageManager.saveUserState(with: name, isRegistered: isRegistered)
     }
-    
-    func logOut() {
+
+    func unregisterUser() {
         isRegistered.toggle()
-        storageManager.username = ""
-        storageManager.isRegistered = isRegistered
+        storageManager.saveUserState(with: nil, isRegistered: isRegistered)
     }
-    
 }

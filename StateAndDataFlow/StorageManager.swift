@@ -8,7 +8,19 @@
 import Foundation
 import SwiftUI
 
-final class StorageManager {
+protocol StorageProtocol {
+    var username: String { get }
+    var isRegistered: Bool { get }
+    func saveUserState(with name: String?, isRegistered: Bool)
+}
+
+final class StorageManager: StorageProtocol {
+    
     @AppStorage("username") var username: String = ""
     @AppStorage("isRegistered") var isRegistered: Bool = false
+
+    func saveUserState(with name: String?, isRegistered: Bool) {
+        username = name ?? ""
+        self.isRegistered = isRegistered
+    }
 }
