@@ -8,26 +8,23 @@
 import SwiftUI
 
 struct RegisterView: View {
-    
-    @EnvironmentObject private var userManger: UserManager
-    
+    @EnvironmentObject private var userManager: UserManager
     @State private var name = ""
     @State private var count = 0
-    
+
+    private func registerUser() {
+        userManager.registerUser(name: name)
+    }
+
     var body: some View {
-        VStack (spacing: 32){
-            HStack {
-                TextField("Enter your name...", text: $name)
-                    .multilineTextAlignment(.center)
-                    .textFieldStyle(.roundedBorder)
-                    .onChange(of: name) { newValue in
-                        count = newValue.count
-                    }
-                
-            }
-            .padding()
+        VStack(spacing: 32) {
+            TextField("Enter your name...", text: $name)
+                .multilineTextAlignment(.center)
+                .textFieldStyle(.roundedBorder)
+                .onChange(of: name) { newValue in
+                    count = newValue.count
+                }.padding()
             Text("Name contains \(count) characters")
-                .lineLimit(2)
                 .foregroundColor(count >= 3 ? .green : .red)
             Button(action: registerUser) {
                 HStack {
@@ -35,12 +32,6 @@ struct RegisterView: View {
                     Text("OK")
                 }
             }.disabled(count < 3 ? true : false)
-        }
-    }
-    
-    private func registerUser() {
-        if !name.isEmpty {
-            userManger.registerUser(name: name)
         }
     }
 }

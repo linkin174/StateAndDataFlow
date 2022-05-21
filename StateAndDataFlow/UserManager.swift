@@ -24,10 +24,10 @@ final class UserManager: ObservableObject {
     func registerUser(name: String) {
         isRegistered.toggle()
         storageManager.saveUserState(with: name, isRegistered: isRegistered)
-    }
+        }
 
-    func unregisterUser() {
+    func dissmissUser() {
         isRegistered.toggle()
         storageManager.saveUserState(with: nil, isRegistered: isRegistered)
-    }
+        }
 }
