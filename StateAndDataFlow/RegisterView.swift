@@ -12,10 +12,6 @@ struct RegisterView: View {
     @State private var name = ""
     @State private var count = 0
 
-    private func registerUser() {
-        userManager.registerUser(name: name)
-    }
-
     var body: some View {
         VStack(spacing: 32) {
             TextField("Enter your name...", text: $name)
@@ -33,6 +29,10 @@ struct RegisterView: View {
                 }
             }.disabled(count < 3 ? true : false)
         }
+    }
+    
+    private func registerUser() {
+        userManager.registerUser(name: name)
     }
 }
 
