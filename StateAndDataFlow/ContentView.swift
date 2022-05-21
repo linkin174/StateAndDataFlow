@@ -15,6 +15,8 @@ struct ContentView: View {
         VStack {
             Text("Hi, \(userManager.name)")
                 .font(.largeTitle)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .padding(.top, 100)
             Text("\(timer.counter)")
                 .font(.largeTitle)
